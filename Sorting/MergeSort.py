@@ -23,6 +23,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
 from random import randint
 
+# Set the recırsion limit to 1,000,000
+sys.setrecursionlimit(1000000)
+
 def Merge(list1, list2):
 	"""
 	Description: Merges two sorted lists.
