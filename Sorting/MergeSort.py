@@ -46,14 +46,20 @@ def Merge(list1, list2):
 
 def MergeSort(l):
 	"""
-	Description:
+	Description: Sorts a list with the merge sort algorithm.
 
 	Args:
+		l (List type): The list which will be sorted.
 
 	Examples:
-	>>>
+	>>> l = [12, 32, 22, 21, 1, 75]
+	>>> MergeSort(l)
+	[1, 12, 21, 22, 32, 75]
 	"""
+	midPoint = len(l)/2
+	firstHalf = l[:midPoint]
+	secondHalf = l[midPoint:]
 	if len(l) > 1:
-		return Merge(MergeSort(l[:(len(l)/2)]), MergeSort(l[(len(l)/2):]))
+		return Merge(MergeSort(firstHalf), MergeSort(secondHalf))
 	else:
 		return l
