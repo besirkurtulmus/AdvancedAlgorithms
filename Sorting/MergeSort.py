@@ -49,7 +49,7 @@ def Merge(list1, list2):
 	else:
 		return list2[:1] + Merge(list1, list2[1:])
 
-def MergeSort(l):
+def MergeSortRecursive(l):
 	"""
 	Description: Sorts a list with the merge sort algorithm.
 
@@ -58,7 +58,7 @@ def MergeSort(l):
 
 	Examples:
 	>>> l = [12, 32, 22, 21, 1, 75]
-	>>> MergeSort(l)
+	>>> MergeSortRecursive(l)
 	[1, 12, 21, 22, 32, 75]
 	"""
 	midPoint = len(l)/2
