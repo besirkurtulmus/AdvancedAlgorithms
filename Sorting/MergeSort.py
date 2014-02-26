@@ -1,4 +1,5 @@
 # @auther Besir Kurtulmus
+# coding: utf-8
 '''
 The MIT License (MIT)
 
@@ -22,6 +23,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
 from random import randint
+import sys
 
 # Set the recırsion limit to 1,000,000
 sys.setrecursionlimit(1000000)
@@ -51,7 +53,8 @@ def Merge(list1, list2):
 
 def MergeSortRecursive(l):
 	"""
-	Description: Sorts a list with the merge sort algorithm.
+	Description: Sorts a list with the merge sort algorithm in a recursive
+		fashion.
 
 	Args:
 		l (List type): The list which will be sorted.
@@ -65,9 +68,32 @@ def MergeSortRecursive(l):
 	firstHalf = l[:midPoint]
 	secondHalf = l[midPoint:]
 	if len(l) > 1:
-		return Merge(MergeSort(firstHalf), MergeSort(secondHalf))
+		return Merge(MergeSortRecursive(firstHalf), MergeSortRecursive(secondHalf))
 	else:
 		return l
+
+def MergeSortIterative(l):
+	"""
+	Description: Sorts a list with the merge sort algorithm in a iterative
+		fashion.
+
+	Args:
+		l (list type): The list which will be sorted
+
+	Examples:
+	>>> l = RandomList(10, 0, 1000)
+	[631, 597, 27, 505, 54, 648, 809, 650, 384, 717]
+	>>> MergeSortIterative(l)
+	[27, 54, 384, 505, 597, 631, 648, 650, 717, 809]
+	"""
+	queue = []
+	for i in l:
+		queue.append([i])
+	while len(queue) > 1:
+		tmp = Merge(queue[0],queue[1])
+		queue = queue[2:]
+		queue.append(tmp)
+	return queue[0]
 
 def RandomList(length, min, max):
 	"""
