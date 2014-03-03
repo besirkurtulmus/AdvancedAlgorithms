@@ -22,7 +22,10 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
+import numpy as np
+from time import time
 from random import choice
+import matplotlib.pyplot as plt
 from MergeSort import RandomList
 
 def Selection(l, k):
@@ -55,3 +58,37 @@ def Selection(l, k):
 		return v
 	elif k > (len(sL) + len(sV)):
 		return Selection(sR, k - len(sL) - len(sV))
+
+def Histogram(listStep, testSize):
+	""""""
+	results = {}
+	xAxis = []
+	yAxis = []
+
+	for i in range(testSize):
+		l = RandomList(listStep * (i + 1), 0, listStep * (i + 1))
+
+		# Start time
+		start = time()
+		# Run Selection
+		Selection(l, choice(range(len(l))) + 1)
+		# Calculate time
+		elapsed = time() - start
+		# Add time to results
+		xAxis.append(listStep * (i + 1))
+		yAxis.append(elapsed)
+
+		#results[listStep * (i + 1)] = elapsed
+
+	pos = np.arange(len(xAxis))
+	width = 1.0
+
+	ax = plt.axes()
+	ax.set_xticks(pos + (width / 2))
+	ax.set_xticklabels(xAxis)
+
+	plt.bar(pos, yAxis, width, color='r')
+	plt.show()
+
+
+
