@@ -27,11 +27,16 @@ from MergeSort import RandomList
 
 def Selection(l, k):
 	"""
-	Description:
+	Description: Finds the k'th element in list l.
 
 	Args:
+		l (type list): The list which the search is going to be in.
+		k (type int): The k'th element in the list.
 
 	Examples:
+	>>> l = RandomList(100, 0, 100)
+	>>> Selection(l, 22)
+	54
 	"""
 	v = choice(l)
 	sL = []
@@ -42,13 +47,11 @@ def Selection(l, k):
 			sL.append(i)
 		elif i == v:
 			sV.append(i)
-		elif i > v:
+		else:
 			sR.append(i)
 	if k <= len(sL):
-		Selection(sL, k)
-	elif k <= (len(sL) + len(sV)):
+		return Selection(sL, k)
+	elif (k > len(sL)) and (k <= ((len(sL) + len(sV)))):
 		return v
 	elif k > (len(sL) + len(sV)):
-		Selection(sR, k - len(sL) - len(sV))
-	else:
-		return v
+		return Selection(sR, k - len(sL) - len(sV))
