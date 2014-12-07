@@ -61,24 +61,28 @@ def Selection(l, k):
 
 def Histogram(listStep, testSize):
 	""""""
-	results = {}
+	# Number of time each step is recalculated for average
+	averagN = 10
+
 	xAxis = []
 	yAxis = []
 
 	for i in range(testSize):
-		l = RandomList(listStep * (i + 1), 0, listStep * (i + 1))
+		elapsedList = []
+		step = listStep * (i + 1)
+		l = RandomList(step, 0, step)
+		for j in range(averagN):
+			# Start time
+			start = time()
+			# Run Selection
+			Selection(l, choice(range(len(l))) + 1)
+			# Calculate time
+			elapsedList.append(time() - start)
 
-		# Start time
-		start = time()
-		# Run Selection
-		Selection(l, choice(range(len(l))) + 1)
-		# Calculate time
-		elapsed = time() - start
 		# Add time to results
-		xAxis.append(listStep * (i + 1))
-		yAxis.append(elapsed)
-
-		#results[listStep * (i + 1)] = elapsed
+		xAxis.append(step)
+		# Get the average result
+		yAxis.append(reduce(lambda x, y: x + y, elapsedList) / float(len(l)))
 
 	pos = np.arange(len(xAxis))
 	width = 1.0
